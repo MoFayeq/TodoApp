@@ -56,12 +56,31 @@
         .login-container input[type="submit"]:hover {
             background-color: #45a049;
         }
+
+        /* Button styles */
+        .login-container .additional-action {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .login-container .additional-action button {
+            background-color: #3490dc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-container .additional-action button:hover {
+            background-color: #2779bd;
+        }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form action="{{route('login')}}" method="post">
+        <form action="{{ route('login') }}" method="post">
             @csrf
             <label for="email">Email</label>
             <input type="text" id="email" name="email" required>
@@ -71,10 +90,10 @@
 
             <input type="submit" value="Login">
         </form>
-    </div>
-    <form action="{{route('signing')}}" method="get">
 
-        <button type="submit" value="signup">
-    </form>   
+        <div class="additional-action">
+            <button onclick="location.href='{{ route('signing') }}'">Signup</button>
+        </div>
+    </div>
 </body>
 </html>

@@ -11,9 +11,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 200vh;
-            margin: 20;
-			
+            height: 100vh;
+            margin: 0;
         }
 
         .registration-container {
@@ -63,7 +62,7 @@
 <body>
     <div class="registration-container">
         <h2>Register</h2>
-        <form action="{{route('signup')}}" method="post">
+        <form action="{{ route('signup') }}" method="post">
             @csrf
             <label for="name">Username</label>
             <input type="text" id="name" name="name" required>
