@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -17,14 +18,16 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', function () {
-    return view('Welcome Page');
+    return view('login');
 });
 Route::view('/welcome', 'Welcome Page')->name('home');
 Route::resource('posts',POSTController::class);
 Route::get('/posts/restore/{id}',[PostController::class,'restore'])->name('restore'); 
 Route::delete('/posts/forcedelete/{id}',[PostController::class,'forcedelete'])->name('forcedelete'); 
-//Route::get('/create', [WelcomeController::class,'make'])->name('create');
 
-//Route::post('/show', [WelcomeController::class,'show'])->name('show');
+Route::post('/login',[AuthController::class,'login'])->name('login');
+Route::post('/signup',[AuthController::class,'signup'])->name('signup');
 
-
+Route::get('/signing',function(){
+    return view('signup');
+})->name('signing');
