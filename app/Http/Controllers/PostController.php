@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -13,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        //$posts = Post::all();
+        $posts = Post::where('user_id', auth()->id())->get();
         return view('posts.index', compact('posts'));
     }
 
@@ -33,7 +35,9 @@ class PostController extends Controller
     {
         Post::create([
             'title' => $request->title,
-            'body' => $request->body
+            'body' => $request->body,
+            'user_id'=>Auth()->user()->id
+
         ]);
        // return response('success');
        return redirect()->route('posts.index');
@@ -45,7 +49,7 @@ class PostController extends Controller
     public function show()
     {
       //  return view('posts.show', compact('post'));
-      $posts = Post::onlyTrashed()->get();
+      $posts = Post::onlyTrashed()->where('user_id', auth()->id())->get();
       return view('posts.soft', compact('posts'));
     }
 
